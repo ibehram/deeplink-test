@@ -22,15 +22,25 @@
 </style>
 <body>
     <div class="container">
-        <input id="urlInput" name="url">
-        <button onclick="goToUrl()">Go to URL</button>
+        <button onclick="goToUrl()" id="launchButton">Launch Loot8</button>
     </div>
 
     <script>
-        function goToUrl() {
-            var url = document.getElementById('urlInput').value;
-            window.location.href = url;
-        }
+        document.getElementById('launchButton').addEventListener('click', function() {
+                  // Replace 'myapp://' with the actual URL scheme of your app
+                  var appScheme = 'loot8auth://';
+            
+                  // Attempt to open the app's URL scheme in a new tab
+                  var newTab = window.open(appScheme, '_blank');
+            
+                  // Check if the new tab was successfully opened
+                  if (newTab) {
+                    // The app is installed, do nothing further
+                  } else {
+                    // Replace 'https://appstore.com/myapp' with the actual app store link
+                    window.location.href = 'https://app.loot8.io/';
+                  }
+                });
     </script>
 </body>
 </html>
