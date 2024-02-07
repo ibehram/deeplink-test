@@ -26,26 +26,33 @@
     </div>
 
     <script>
-        document.getElementById('launchButton').addEventListener('click', function() {
-                  // URL scheme of your app
-                  var appScheme = 'loot8auth://';
-            
-                  // Check if the user is on a mobile browser
-                  var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-            
-                  if (isMobile) {
-                    // User is on a mobile browser, attempt to open the app's URL scheme
-                    try {
-                      window.open(appScheme);
-                    } catch (error) {
-                      // An error occurred, likely because the app is not installed open the app on web browser only
-                      window.open('https://app.loot8.io/', '_blank');
+        document.getElementById('launchButton').addEventListener('click', launchApp);
+                document.getElementById('launchButton').addEventListener('touchstart', launchApp);
+ 
+                function launchApp(event) {
+                    // Prevent default behavior of the event
+                    event.preventDefault();
+
+                    // URL scheme of your app
+                    var appScheme = 'loot8auth://';
+
+                    // Check if the user is on a mobile browser
+                    var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+                
+                    if (isMobile) {
+                        // User is on a mobile browser, attempt to open the app's URL scheme
+                        try {
+                            window.open(appScheme);
+                        } catch (error) {
+                            // An error occurred, likely because the app is not installed open the app on web browser only
+                            window.open('https://app.loot8.io/', '_blank');
+                        }
+                    } else {
+                        // User is on a desktop browser, open 'https://app.loot8.io/' in a new tab
+                        console.log('works')
+                        window.open('https://app.loot8.io/', '_blank');
                     }
-                  } else {
-                    // User is on a desktop browser, open 'https://app.loot8.io/' in a new tab
-                    window.open('https://app.loot8.io/', '_blank');
-                  }
-                });
+                }
     </script>
 </body>
 </html>
