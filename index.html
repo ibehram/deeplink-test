@@ -27,18 +27,23 @@
 
     <script>
         document.getElementById('launchButton').addEventListener('click', function() {
-                  // Replace 'myapp://' with the actual URL scheme of your app
+                  // URL scheme of your app
                   var appScheme = 'loot8auth://';
             
-                  // Attempt to open the app's URL scheme in a new tab
-                  var newTab = window.open(appScheme, '_blank');
+                  // Check if the user is on a mobile browser
+                  var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
             
-                  // Check if the new tab was successfully opened
-                  if (newTab) {
-                    // The app is installed, do nothing further
+                  if (isMobile) {
+                    // User is on a mobile browser, attempt to open the app's URL scheme
+                    try {
+                      window.open(appScheme);
+                    } catch (error) {
+                      // An error occurred, likely because the app is not installed open the app on web browser only
+                      window.open('https://app.loot8.io/', '_blank');
+                    }
                   } else {
-                    // Replace 'https://appstore.com/myapp' with the actual app store link
-                    window.location.href = 'https://app.loot8.io/';
+                    // User is on a desktop browser, open 'https://app.loot8.io/' in a new tab
+                    window.open('https://app.loot8.io/', '_blank');
                   }
                 });
     </script>
